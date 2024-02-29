@@ -1,0 +1,43 @@
+/* body {
+    background: linear-gradient(90deg, #e0c3fc 0%, #8ec5fc 100%);
+} */
+
+#logout-form {
+    cursor: pointer;
+}
+
+.capitalize {
+    text-transform: lowercase;
+}
+
+.capitalize::first-letter {
+    text-transform: uppercase !important;
+}
+
+.mood-happy {
+    color: var(--bs-danger) !important;
+}
+
+.mood-sad {
+    color: var(--bs-grey) !important;
+}
+
+.mood-neutral {
+    color: var(--bs-cyan) !important;
+}
+
+.flatpickr-input[readonly] {
+    background-color: initial!important;
+}
+
+.p-datatable .p-datatable-tbody > .p-datatable-emptymessage > td {
+    text-align: center!important;
+}
+
+.p-dropdown-panel.p-component.p-ripple-disabled {
+    z-index: 1099 !important;
+}
+
+.p-dropdown-items {
+    padding: 0!important;
+}

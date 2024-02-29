@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div id="main-wrapper">
+        <h3>Hello {{ user.full_name }}</h3>
+        <p>You have an upcoming appointment on {{ appointment.date }} 
+            {% if appointment.time %} 
+            <span> at {{ appointment.time }} </span>
+            {% endif %}
+        </p>
+        <p>Details:</p>
+        <ul>
+            <li>Appointment: {{ appointment.title }}</li>
+            {% if appointment.doctor %}
+            <li>Doctor: {{ appointment.doctor }}</li>
+            {% endif %}
+            {% if appointment.location %}
+            <li>Location: 
+                <a href="https://maps.google.com/?q={{ appointment.location }}" >{{ appointment.location }}</a>
+            </li>
+            {% endif %}
+            
+            
+        </ul>
+    </div>
+{% endblock %}

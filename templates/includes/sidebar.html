@@ -1,0 +1,115 @@
+{% load static %} {% load filters %}
+
+<aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+  <div class="app-brand demo">
+    <a href="index.html" class="app-brand-link">
+      <span class="app-brand-logo demo"> </span>
+      <span class="app-brand-text demo menu-text fw-bolder ms-2">
+        <i class='bx bx-md bx-donate-heart me-2'></i>iCare
+      </span>
+    </a>
+
+    <a
+      href="javascript:void(0);"
+      class="layout-menu-toggle menu-link text-large ms-auto ">
+      <i class="bx bx-chevron-left bx-sm align-middle"></i>
+    </a>
+  </div>
+
+  <div class="menu-inner-shadow"></div>
+  {% with request.resolver_match.url_name as url_name %}
+  <ul class="menu-inner py-1">
+    <!-- Dashboard -->
+    <li class="menu-item {% if url_name == 'dashboard' %}active{% endif %}">
+      <a href='{% url 'myhealth:dashboard' %}' class="menu-link">
+        <i class="menu-icon tf-icons bx bx-home-circle"></i>
+        <div data-i18n="Analytics">Dashboard</div>
+      </a>
+    </li>
+    {% comment %} <li class="menu-item">
+      <a href="javascript:void(0);" class="menu-link menu-toggle">
+        <i class="menu-icon tf-icons bx bx-dock-top"></i>
+        <div data-i18n="Account Settings">Account Settings</div>
+      </a>
+      <ul class="menu-sub">
+        <li class="menu-item">
+          <a href="pages-account-settings-account.html" class="menu-link">
+            <div data-i18n="Account">Account</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="pages-account-settings-notifications.html" class="menu-link">
+            <div data-i18n="Notifications">Notifications</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="pages-account-settings-connections.html" class="menu-link">
+            <div data-i18n="Connections">Connections</div>
+          </a>
+        </li>
+      </ul>
+    </li> {% endcomment %}
+    <li class="menu-header small text-uppercase">
+      <span class="menu-header-text">Menu</span>
+    </li>
+    <!-- Cards -->
+    <li class="menu-item {% if url_name == 'calendar' %}active{% endif %}">
+      <a href='{% url 'myhealth:calendar' %}' class="menu-link">
+        <i class="menu-icon tf-icons bx bx-calendar-event"></i>
+        <div data-i18n="Basic">My Calendar</div>
+      </a>
+    </li>
+    <li class="menu-item">
+        <a href='{% url 'myhealth:contacts' %}' class="menu-link">
+            <i class='menu-icon tf-icons bx bx-book'></i>
+            <div data-i18n="Basic">Contacts</div>
+        </a>
+    </li>
+    {% comment %} <li class="menu-item">
+      <a href='{% url 'myhealth:appointments' %}' class="menu-link">
+        <i class="menu-icon tf-icons bx bx-edit"></i>
+        <div data-i18n="Basic">Appointments</div>
+      </a>
+    </li>
+    <li class="menu-item">
+      <a href='{% url 'myhealth:intercourses' %}' class="menu-link">
+        <i class='menu-icon tf-icons bx bx-bed'></i>
+        <div data-i18n="Basic">Intercourses</div>
+      </a>
+    </li> {% endcomment %}
+    <!-- User interface -->
+    <li class="menu-item {% if url_name == 'appointments' or url_name == 'intercourses' or url_name == 'sleep' or url_name == 'physical_activities' %}active open{% endif %}">
+      <a href="javascript:void(0)" class="menu-link menu-toggle">
+        <i class='menu-icon tf-icons bx bx-book-bookmark'></i>
+        <div data-i18n="Extended UI">Tracking</div>
+      </a>
+      <ul class="menu-sub">
+        <li class="menu-item {% if url_name == 'appointments' %}active{% endif %}">
+          <a href='{% url 'myhealth:appointments' %}' class="menu-link">
+            <i class="menu-icon tf-icons bx bx-edit"></i>
+            <div data-i18n="Basic">Appointments</div>
+          </a>
+        </li>
+        <li class="menu-item {% if url_name == 'intercourses' %}active{% endif %}">
+          <a href='{% url 'myhealth:intercourses' %}' class="menu-link">
+            <i class='menu-icon tf-icons bx bx-bed'></i>
+            <div data-i18n="Basic">Intercourses</div>
+          </a>
+        </li>
+        <li class="menu-item {% if url_name == 'sleep' %}active{% endif %}">
+            <a href='{% url 'myhealth:sleep' %}' class="menu-link">
+              <i class='menu-icon tf-icons bx bx-alarm-snooze'></i>
+              <div data-i18n="Basic">Sleep</div>
+            </a>
+        </li>
+        <li class="menu-item {% if url_name == 'physical_activities' %}active{% endif %}">
+            <a href='{% url 'myhealth:physical_activities' %}' class="menu-link">
+                <i class='menu-icon tf-icons bx bx-run'></i>
+                <div data-i18n="Basic">Physical Activities</div>
+            </a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+  {% endwith %}
+</aside>
