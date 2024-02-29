@@ -17,6 +17,8 @@ from django.urls import reverse_lazy
 from os import getenv
 from dotenv import load_dotenv
 from django.contrib.messages import constants as messages
+from decouple import config
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -169,8 +171,7 @@ WEBPACK_LOADER = {
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_HOST_USER = 'apikey' 
-EMAIL_HOST_PASSWORD = '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'
-#EMAIL_HOST_PASSWORD = getenv('SENDGRID_API_KEY')
+EMAIL_HOST_PASSWORD = config('SENDGRID_API_KEY')
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'ha.le.developer@protonmail.com'
