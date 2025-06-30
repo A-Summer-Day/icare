@@ -1,8 +1,8 @@
 <template>
     <div class="">
         <div class="d-flex align-items-center justify-content-between">
-            <h2>Intercourse History</h2>
-            <button type="button" class="btn btn-primary" @click="openAddIntercourseModal(null)"> Add Intercourse</button>
+            <h2>Physical Activities</h2>
+            <button type="button" class="btn btn-primary" @click="openAddPhysicalActivityModal(null)"> Add Physical Activity</button>
         </div>
 
 
@@ -16,32 +16,29 @@
         </div>
         <div class="row justify-content-center mt-4">
             <div class="col-12">
-                <primvevue-data-table id="intercourseTable" :value="intercourses" paginator :rows="10" stripedRows
+                <primvevue-data-table id="physicalActivityTable" :value="physical_activities" paginator :rows="10" stripedRows
                     tableStyle="min-width: 50rem;">
-                    <template #empty> No intercourses found. </template>
-                    <template #loading> Loading intercourses data. Please wait. </template>
+                    <template #empty> No physical activities found. </template>
+                    <template #loading> Loading physical activities data. Please wait. </template>
                     <primvevue-column field="date" header="Date" sortable></primvevue-column>
-                    <primvevue-column field="with_whom" header="With Whom" sortable :sortField="(event) => sortByFullName(event)" nullSortOrder="-1">
-                        <!-- <template #body="slotProps">
-                            {{ slotProps.data.with_whom.last_name ? slotProps.data.with_whom.first_name + ' ' + slotProps.data.with_whom.last_name : slotProps.data.with_whom.first_name }}
-                        </template> -->
+                    <primvevue-column field="activity_type" header="Activity Type" sortable>
+                    </primvevue-column>
+                    <!-- <primvevue-column field="activity_type" header="Activity Type" sortable :sortField="(event) => sortByFullName(event)" nullSortOrder="-1">
                         <template #body="{ data }">
                             {{ data.with_whom.last_name ? data.with_whom.first_name + ' ' + data.with_whom.last_name : data.with_whom.first_name }}
                         </template>
-                    </primvevue-column>
-                    <primvevue-column field="protection_used" header="Protection Used" sortable>
-                        <template #body="slotProps">
-                            {{ slotProps.data.protection_used ? 'Yes' : 'No' }}
-                        </template>
-                    </primvevue-column>
-                    <primvevue-column field="contraception_method" header="Contraception Method"
+                    </primvevue-column> -->
+                    <primvevue-column field="specific_activity" header="Specific Activity" sortable>
+                    </primvevue-column> 
+                    <primvevue-column field="duration_minutes" header="Duration Minutes"
                         sortable></primvevue-column>
+                    <primvevue-column field="calories_burned" header="Calories Burned" sortable></primvevue-column>    
                     <primvevue-column field="notes" header="Notes" sortable></primvevue-column>
                     <primvevue-column field="actions" header="Actions">
                         <template #body="{ data }">
                             <div class="d-flex">
                                 <a class="dropdown-item edit-btn" href="javascript:void(0);"
-                                    @click="openAddIntercourseModal(data)">
+                                    @click="openAddPhysicalActivityModal(data)">
                                     <i class="bx bx-edit-alt me-1"></i>
                                 </a>
                                 <a class="dropdown-item delete-btn" href="javascript:void(0);"
@@ -53,7 +50,7 @@
                         </template>
                     </primvevue-column>
                 </primvevue-data-table>
-                <!-- <data-table ref="myDataTable" id="intercourseTable" :columns="columns" :data="intercourses"
+                <!-- <data-table ref="myDataTable" id="physicalActivityTable" :columns="columns" :data="physical_activities"
                     class="table table-hover table-striped">
                     <thead>
                         <tr>
@@ -68,52 +65,52 @@
                 </data-table> -->
             </div>
         </div>
-        <div class="modal fade" id="saveIntercourseModal" tabindex="-1" aria-labelledby="saveIntercourseModalLabel"
+        <div class="modal fade" id="savePhysicalActivityModal" tabindex="-1" aria-labelledby="savePhysicalActivityModalLabel"
             aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="">Add an intercourse</h5>
+                        <h5 class="modal-title" id="">Add an physicalActivity</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form id="saveIntercourseForm">
+                        <form id="savePhysicalActivityForm">
                             <div class="row mb-3">
                                 <label for="flatpickr-date" class="col-sm-3 col-form-label">Date</label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" placeholder="YYYY-MM-DD" name="date"
-                                        v-model="intercourseDate" id="flatpickr-date" />
+                                        v-model="physicalActivityDate" id="flatpickr-date" />
 
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="intercourseProtectionUsed" class="col-sm-3 col-form-label">Protection
+                                <label for="physicalActivityProtectionUsed" class="col-sm-3 col-form-label">Protection
                                     Used</label>
                                 <div class="col-sm-9">
-                                    <input type="checkbox" class="form-check-input" id="intercourseProtectionUsed"
-                                        name="notes" v-model="intercourseProtectionUsed">
+                                    <input type="checkbox" class="form-check-input" id="physicalActivityProtectionUsed"
+                                        name="notes" v-model="physicalActivityProtectionUsed">
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="intercourseContraceptionMethod" class="col-sm-3 col-form-label">Contraception
+                                <label for="physicalActivityContraceptionMethod" class="col-sm-3 col-form-label">Contraception
                                     Method</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="intercourseContraceptionMethod"
-                                        name="contraception_method" v-model="intercourseContraceptionMethod" />
+                                    <input type="text" class="form-control" id="physicalActivityContraceptionMethod"
+                                        name="contraception_method" v-model="physicalActivityContraceptionMethod" />
                                 </div>
                             </div>
                             <!-- <div class="row mb-3">
-                                <label for="intercourseWithWhom" class="col-sm-3 col-form-label">With Whom</label>
+                                <label for="physicalActivityWithWhom" class="col-sm-3 col-form-label">With Whom</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="intercourseWithWhom" name="with_whom"
-                                        v-model="intercourseWithWhom">
+                                    <input type="text" class="form-control" id="physicalActivityWithWhom" name="with_whom"
+                                        v-model="physicalActivityWithWhom">
                                 </div>
                             </div> -->
                             <div class="row mb-3">
-                                <label for="intercourseWithWhom" class="col-sm-3 col-form-label">With Whom</label>
+                                <label for="physicalActivityWithWhom" class="col-sm-3 col-form-label">With Whom</label>
                                 <div class="col-sm-9">
-                                    <primvevue-dropdown v-model="intercourseWithWhom" :options="contactOptions"
+                                    <primvevue-dropdown v-model="physicalActivityWithWhom" :options="contactOptions"
                                         optionLabel="name" optionValue="id" placeholder="Select a Contact" class="w-full md:w-14rem">
 
                                         <template #option="slotProps">
@@ -127,10 +124,10 @@
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="intercourseTitle" class="col-sm-3 col-form-label">Notes</label>
+                                <label for="physicalActivityTitle" class="col-sm-3 col-form-label">Notes</label>
                                 <div class="col-sm-9">
-                                    <textarea class="form-control" id="intercourseNotes" name="notes"
-                                        v-model="intercourseNotes"></textarea>
+                                    <textarea class="form-control" id="physicalActivityNotes" name="notes"
+                                        v-model="physicalActivityNotes"></textarea>
                                 </div>
                             </div>
                         </form>
@@ -138,7 +135,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" @click="saveIntercourse">Save</button>
+                        <button type="button" class="btn btn-primary" @click="savePhysicalActivity">Save</button>
                     </div>
                 </div>
             </div>
@@ -158,7 +155,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-danger" @click="deleteIntercourse">Delete</button>
+                        <button type="button" class="btn btn-danger" @click="deletePhysicalActivity">Delete</button>
                     </div>
                 </div>
             </div>
@@ -171,19 +168,19 @@ import moment from 'moment'
 import { ref } from 'vue';
 
 export default {
-    name: 'Intercourses',
+    name: 'PhysicalActivities',
     props: [],
     data: function () {
         return {
-            intercourseId: '',
-            intercourseDate: '',
-            intercourseNotes: '',
-            intercourseProtectionUsed: '',
-            intercourseContraceptionMethod: '',
-            intercourseWithWhom: '',
-            intercourseIdToDelete: null,
-            intercourseToEdit: null,
-            intercourses: [],
+            physicalActivityId: '',
+            physicalActivityDate: '',
+            physicalActivityNotes: '',
+            physicalActivityProtectionUsed: '',
+            physicalActivityContraceptionMethod: '',
+            physicalActivityWithWhom: '',
+            physicalActivityIdToDelete: null,
+            physicalActivityToEdit: null,
+            physical_activities: [],
             contacts: [],
             successMessage: '',
             errorMessage: ''
@@ -203,49 +200,49 @@ export default {
         formatTime(time, format) {
             return moment(time, 'HH:mm:ss').format(format);
         },
-        openAddIntercourseModal(intercourse = null) {
-            console.log(intercourse);
-            if (intercourse != null) {
-                this.intercourseDate = intercourse.date;
-                this.intercourseId = intercourse.id;
-                this.intercourseContraceptionMethod = intercourse.contraception_method;
-                this.intercourseProtectionUsed = intercourse.protection_used;
-                this.intercourseNotes = intercourse.notes;
-                this.intercourseWithWhom = intercourse.with_whom.id;
+        openAddPhysicalActivityModal(physicalActivity = null) {
+            console.log(physicalActivity);
+            if (physicalActivity != null) {
+                this.physicalActivityDate = physicalActivity.date;
+                this.physicalActivityId = physicalActivity.id;
+                this.physicalActivityContraceptionMethod = physicalActivity.contraception_method;
+                this.physicalActivityProtectionUsed = physicalActivity.protection_used;
+                this.physicalActivityNotes = physicalActivity.notes;
+                this.physicalActivityWithWhom = physicalActivity.with_whom.id;
             }
-            $('#saveIntercourseModal').modal('show');
+            $('#savePhysicalActivityModal').modal('show');
         },
-        hideAddIntercourseModal() {
-            $('#saveIntercourseForm')[0].reset();
-            $('#saveIntercourseModal').modal('hide');
+        hideAddPhysicalActivityModal() {
+            $('#savePhysicalActivityForm')[0].reset();
+            $('#savePhysicalActivityModal').modal('hide');
         },
-        getIntercourses() {
-            let url = '../get_intercourses/';
+        getPhysicalActivities() {
+            let url = '../get_physical_activities/';
             this.axios.get(url).then(response => {
-                this.intercourses = response.data.intercourses;
+                this.physical_activities = response.data.physical_activities;
 
 
             }).catch(error => {
                 console.log(error);
             });
         },
-        saveIntercourse() {
-            let url = this.intercourseId ? '../update_intercourse/' : '../save_intercourse/';
+        savePhysicalActivity() {
+            let url = this.physicalActivityId ? '../update_physicalActivity/' : '../save_physicalActivity/';
             let data = new FormData()
-            if (this.intercourseId) {
-                data.append('id', this.intercourseId);
+            if (this.physicalActivityId) {
+                data.append('id', this.physicalActivityId);
             }
-            data.append('date', this.intercourseDate)
-            data.append('with_whom', this.intercourseWithWhom);
-            data.append('protection_used', this.intercourseProtectionUsed);
-            data.append('contraception_method', this.intercourseContraceptionMethod);
-            data.append('notes', this.intercourseNotes);
+            data.append('date', this.physicalActivityDate)
+            data.append('with_whom', this.physicalActivityWithWhom);
+            data.append('protection_used', this.physicalActivityProtectionUsed);
+            data.append('contraception_method', this.physicalActivityContraceptionMethod);
+            data.append('notes', this.physicalActivityNotes);
             this.axios.post(url, data).then(response => {
                 console.log(response.data)
                 if (response.data.success) {
                     this.successMessage = response.data.message;
-                    this.getIntercourses();
-                    this.hideAddIntercourseModal();
+                    this.getPhysicalActivities();
+                    this.hideAddPhysicalActivityModal();
                 }
 
             }).catch(error => {
@@ -255,17 +252,17 @@ export default {
         },
         confirmDelete(id) {
             console.log(id);
-            this.intercourseIdToDelete = id;
+            this.physicalActivityIdToDelete = id;
             $('#confirmDeletetModal').modal('show');
         },
-        deleteIntercourse() {
-            let url = '../delete_intercourse/' + this.intercourseIdToDelete;
+        deletePhysicalActivity() {
+            let url = '../delete_physicalActivity/' + this.physicalActivityIdToDelete;
             this.axios.delete(url).then(response => {
                 if (response.data.success) {
                     this.successMessage = response.data.message;
-                    this.getIntercourses();
+                    this.getPhysicalActivities();
                     $('#confirmDeletetModal').modal('hide');
-                    this.intercourseIdToDelete = null;
+                    this.physicalActivityIdToDelete = null;
                 }
 
             }).catch(error => {
@@ -286,7 +283,7 @@ export default {
         }
     },
     created() {
-        this.getIntercourses();
+        this.getPhysicalActivities();
         this.getContacts();
     },
     mounted() {
@@ -300,15 +297,15 @@ export default {
             dateFormat: "H:i"
         })
 
-        const modal = document.getElementById('saveIntercourseModal');
+        const modal = document.getElementById('savePhysicalActivityModal');
 
         modal.addEventListener('hide.bs.modal', () => {
-            this.intercourseId = '';
-            this.intercourseDate = '';
-            this.intercourseNotes = '';
-            this.intercourseProtectionUsed = '';
-            this.intercourseContraceptionMethod = '';
-            this.intercourseWithWhom = '';
+            this.physicalActivityId = '';
+            this.physicalActivityDate = '';
+            this.physicalActivityNotes = '';
+            this.physicalActivityProtectionUsed = '';
+            this.physicalActivityContraceptionMethod = '';
+            this.physicalActivityWithWhom = '';
         })
 
 

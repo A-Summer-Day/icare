@@ -128,6 +128,13 @@ class PhysicalActivity(models.Model):
     notes = models.TextField(blank=True, null=True)
     date = models.DateField()
 
+    class Meta:
+        verbose_name = _("Physical Activity")
+        verbose_name_plural = _("Physical Activities")
+
+    def get_activity_type(self) -> ActivityType:
+        return self.ActivityType[self.activity_type].label    
+
     def __str__(self):
         return f"{self.specific_activity} ({self.get_activity_type_display()}) - {self.date}"
 
