@@ -22,7 +22,8 @@ from users import views as users_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('register/', users_views.register, name='register'),
-    path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
+    # path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
+    path('logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
     path('login/', users_views.user_login, name='login'),
     path('', include(('myhealth.urls', 'myhealth'), namespace='myhealth')),
 ]
