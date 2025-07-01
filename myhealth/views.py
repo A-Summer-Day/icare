@@ -437,8 +437,12 @@ def get_appointment_data_for_chart(request):
     today = datetime.today()
     # appointments = Appointment.objects.filter(user_id = current_user.id, date__gte = today).order_by('-date')[:5]
     # appointments = Appointment.objects.filter(user_id = current_user.id, date__gte = today).order_by('date')[:5]
+    # appointments = Appointment.objects.filter(
+    #     Q(time__isnull=False, user=current_user, date__gte=today, time__gte=datetime.now()) | Q(time__isnull=True, user=current_user, date__gte=today)).order_by('date')[:5]
     appointments = Appointment.objects.filter(
-        Q(time__isnull=False, user=current_user, date__gte=today, time__gte=datetime.now()) | Q(time__isnull=True, user=current_user, date__gte=today)).order_by('date')[:5]
+        Q(date__gt=today, user=current_user) |
+        Q(date=today, time__gte=datetime.now(), user=current_user)
+    ).order_by('date', 'time')[:5]
     # appointments = reversed(appointments)
     appointments = list(appointments.values())
 
