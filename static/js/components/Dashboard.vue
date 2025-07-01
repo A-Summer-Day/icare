@@ -188,8 +188,8 @@
                         <div class="" v-else>
                             <div class="text-dark">
                                 <p><strong>No upcoming appointments.</strong></p>
-                                <p>It looks like you haven't logged any period data yet. To get insights into your menstrual cycle, start logging your periods using our app.</p>
-                                <p><em>Feel free to explore other features in the meantime!</em></p>
+                                <!-- <p>It looks like you haven't logged any period data yet. To get insights into your menstrual cycle, start logging your periods using our app.</p>
+                                <p><em>Feel free to explore other features in the meantime!</em></p> -->
                             </div>
                         </div>
                     </div>
